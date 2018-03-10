@@ -7,6 +7,7 @@ describe Astley do
     specify 'Clicks URL' do
       ENV['token'] = 'faketoken'
       ENV['link'] = 'http://example.com'
+      ENV['tz_offset'] = 0
       expect(Astley.clicks_url).to eq 'https://api-ssl.bitly.com/v3/link/clicks?access_token=faketoken&link=http://example.com&timezone=0&unit=minute&units=60&rollup=false'
     end
 
