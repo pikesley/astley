@@ -1,5 +1,7 @@
 require 'dotenv'
 require 'httparty'
+require 'countries'
+
 require 'json'
 
 require 'astley/version'
@@ -47,7 +49,7 @@ module Astley
     (self.get self.clicks_url)['data']['link_clicks'].select { |h|
       h['clicks'] > 0
     }.map { |h|
-      h['dt']
+      { "#{h['dt']}" => h['clicks'] }
     }.reverse
   end
 
@@ -55,5 +57,31 @@ module Astley
     (self.get self.countries_url)['data']['countries'].map { |c|
       [c['country'].to_sym, c['clicks']]
     }.to_h
+  end
+
+  def self.lookup symbol
+    case symbol
+    when :GB
+      return 'the UK'
+    when :US
+      return 'the USA'
+    else
+      ISO3166::Country.new(symbol).name
+    end
+  end
+
+  def self.assemble_data
+    clicks = self.fetch_clicks.map { |t| [t.keys[0]] * t.values[0] }.flatten
+    countries = self.fetch_countries
+
+    data = []
+    countries.to_a.map{ |u| [u[0]] * [u[1]][0] }.flatten.each do |symbol|
+      data.push({
+        country: symbol,
+        timestamp: clicks.shift.to_i
+      })
+    end
+
+    data
   end
 end
