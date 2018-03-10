@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-ssl.bitly.com/v3/link/clicks?access_token=<token>&link=<link>&rollup=false&timezone=0&unit=minute&units=5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 10 Mar 2018 16:12:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '311'
+      Connection:
+      - keep-alive
+      Etag:
+      - '"c570d5326fa3c6b950e10deb640d830b23ffd55c"'
+    body:
+      encoding: UTF-8
+      string: '{"status_code": 200, "data": {"units": 5, "unit_reference_ts": 1520698366,
+        "tz_offset": 0, "unit": "minute", "link_clicks": [{"dt": 1520698320, "clicks":
+        1}, {"dt": 1520698260, "clicks": 0}, {"dt": 1520698200, "clicks": 0}, {"dt":
+        1520698140, "clicks": 0}, {"dt": 1520698080, "clicks": 0}]}, "status_txt":
+        "OK"}'
+    http_version: 
+  recorded_at: Sat, 10 Mar 2018 16:12:46 GMT
+recorded_with: VCR 4.0.0

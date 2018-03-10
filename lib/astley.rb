@@ -1,4 +1,6 @@
 require 'dotenv'
+require 'httparty'
+require 'json'
 
 require 'astley/version'
 
@@ -13,7 +15,7 @@ module Astley
       link: ENV['link'],
       timezone: ENV['tz_offset'],
       unit: 'minute',
-      units: 60
+      units: ENV['interval']
     }
 
     qs.merge! extra_qs
@@ -31,5 +33,27 @@ module Astley
 
   def self.countries_url
     self.url '/v3/link/countries'
+  end
+
+  def self.get url
+    JSON.parse HTTParty.get(url, {
+      headers: {
+        Accept: 'application/json'
+      }
+    }).body
+  end
+
+  def self.fetch_clicks
+    (self.get self.clicks_url)['data']['link_clicks'].select { |h|
+      h['clicks'] > 0
+    }.map { |h|
+      h['dt']
+    }.reverse
+  end
+
+  def self.fetch_countries
+    (self.get self.countries_url)['data']['countries'].map { |c|
+      [c['country'].to_sym, c['clicks']]
+    }.to_h
   end
 end
