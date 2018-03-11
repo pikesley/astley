@@ -1,4 +1,12 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in astley.gemspec
-gemspec
+gem 'httparty'
+gem 'dotenv'
+gem 'twitter'
+gem 'bundler'
+gem 'rake'
+gem 'rspec'
+gem 'guard-rspec'
+gem 'vcr'
+gem 'webmock'
+gem 'coveralls'

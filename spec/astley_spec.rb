@@ -1,8 +1,4 @@
 describe Astley do
-  it 'has a version number' do
-    expect(Astley::VERSION).not_to be nil
-  end
-
   context 'fetch data' do
     it 'gets clicks data', :vcr do
       expect(Astley.fetch_clicks).to eq [

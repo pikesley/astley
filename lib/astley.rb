@@ -5,8 +5,7 @@ require 'twitter'
 require 'singleton'
 require 'json'
 
-require 'astley/version'
-require 'astley/twitter_client'
+require_relative 'astley/twitter_client'
 
 Dotenv.load
 
