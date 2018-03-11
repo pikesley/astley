@@ -6,47 +6,17 @@ describe Astley do
   context 'fetch data' do
     it 'gets clicks data', :vcr do
       expect(Astley.fetch_clicks).to eq [
-        '1520698320' => 1
+        '1520709540' => 1
       ]
-    end
-
-    it 'gets countries data', :vcr do
-      expect(Astley.fetch_countries).to eq ({
-        GB: 1
-      })
     end
   end
 
   context 'reconcile data' do
-    it 'looks up countries' do
-      expect(Astley.lookup :DE).to eq 'Germany'
-      expect(Astley.lookup :GB).to eq 'the UK'
-      expect(Astley.lookup :US).to eq 'the USA'
-    end
-
-    it 'matches clicks with locations', :vcr do
-      expect(Astley.assemble_data).to eq [
-        {
-          country: :DE,
-          timestamp: 1520706300
-        },
-        {
-          country: :DE,
-          timestamp: 1520706360
-        },
-        {
-          country: :GB,
-          timestamp: 1520706360
-        },
-        {
-          country: :US,
-          timestamp: 1520706420
-        },
-        {
-          country: :US,
-          timestamp: 1520706480
-        }
-      ]
+    it 'prepares tweets', :vcr do
+      expect(Astley::TwitterClient.instance.client).to receive(:update).with (
+        'Somebody got Rickrolled at 16:27 on 2018-03-11'
+      )
+      Astley.send_tweets
     end
   end
 end

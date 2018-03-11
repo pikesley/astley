@@ -1,10 +1,12 @@
 require 'dotenv'
 require 'httparty'
-require 'countries'
+require 'twitter'
 
+require 'singleton'
 require 'json'
 
 require 'astley/version'
+require 'astley/twitter_client'
 
 Dotenv.load
 
@@ -33,10 +35,6 @@ module Astley
     self.url '/v3/link/clicks', {rollup: false}
   end
 
-  def self.countries_url
-    self.url '/v3/link/countries'
-  end
-
   def self.get url
     JSON.parse HTTParty.get(url, {
       headers: {
@@ -53,35 +51,16 @@ module Astley
     }.reverse
   end
 
-  def self.fetch_countries
-    (self.get self.countries_url)['data']['countries'].map { |c|
-      [c['country'].to_sym, c['clicks']]
-    }.to_h
+  def self.listify_clicks
+    self.fetch_clicks.map { |t| [t.keys[0]] * t.values[0] }.flatten
   end
 
-  def self.lookup symbol
-    case symbol
-    when :GB
-      return 'the UK'
-    when :US
-      return 'the USA'
-    else
-      ISO3166::Country.new(symbol).name
+  def self.send_tweets
+    self.listify_clicks.each do |timestamp|
+      tweet = 'Somebody got Rickrolled at %s' % [
+        DateTime.strptime(timestamp, '%s').strftime('%H:%M on %Y-%m-%d')
+      ]
+      TwitterClient.instance.client.update tweet
     end
-  end
-
-  def self.assemble_data
-    clicks = self.fetch_clicks.map { |t| [t.keys[0]] * t.values[0] }.flatten
-    countries = self.fetch_countries
-
-    data = []
-    countries.to_a.map{ |u| [u[0]] * [u[1]][0] }.flatten.each do |symbol|
-      data.push({
-        country: symbol,
-        timestamp: clicks.shift.to_i
-      })
-    end
-
-    data
   end
 end

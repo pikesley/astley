@@ -23,13 +23,12 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'httparty', '~> 0.16'
   spec.add_dependency 'dotenv', '~> 2.2'
-  spec.add_dependency 'countries' #, '~> 2.2'
+  spec.add_dependency 'twitter', '~> 5'
 
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'guard-rspec', '~> 4.7'
-  spec.add_development_dependency 'timecop', '~> 0.9'
   spec.add_development_dependency 'vcr', '~> 4.0'
   spec.add_development_dependency 'webmock', '~> 3.3'
   spec.add_development_dependency 'coveralls', '~> 0.8'

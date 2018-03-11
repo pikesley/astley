@@ -1,0 +1,195 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-ssl.bitly.com/v3/link/clicks?access_token=<token>&link=<link>&rollup=false&timezone=0&unit=minute&units=5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 11 Mar 2018 16:29:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '311'
+      Connection:
+      - keep-alive
+      Etag:
+      - '"3232132bffb3b7ce67aa4954b668159095de4a39"'
+    body:
+      encoding: UTF-8
+      string: '{"status_code": 200, "data": {"units": 5, "unit_reference_ts": 1520785740,
+        "tz_offset": 0, "unit": "minute", "link_clicks": [{"dt": 1520785740, "clicks":
+        0}, {"dt": 1520785680, "clicks": 0}, {"dt": 1520785620, "clicks": 1}, {"dt":
+        1520785560, "clicks": 0}, {"dt": 1520785500, "clicks": 0}]}, "status_txt":
+        "OK"}'
+    http_version: 
+  recorded_at: Sun, 11 Mar 2018 16:29:00 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/1.1/statuses/update.json
+    body:
+      encoding: UTF-8
+      string: status=foo
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - TwitterRubyGem/5.17.0
+      Authorization:
+      - OAuth oauth_consumer_key="trASp8cuQW9tATjHEDtvMaoYr", oauth_nonce="b15f45befc2091e2c9f87a3fa66f0081",
+        oauth_signature="c4aqcHxSKmIXbvPfTr9Jp3Thmw4%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1520785740", oauth_token="972554172108288003-9CunSMZSUJdrn8Xnq5iDcmxC3m1iJsF",
+        oauth_version="1.0"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '85'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 11 Mar 2018 16:29:01 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Sun, 11 Mar 2018 16:29:01 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_f
+      Set-Cookie:
+      - guest_id=v1%3A152078574136958878; Expires=Tue, 10 Mar 2020 16:29:01 UTC; Path=/;
+        Domain=.twitter.com
+      - lang=en-gb; Path=/
+      - personalization_id="v1_rhkqRoTs1MpKu6+KN6dsWA=="; Expires=Tue, 10 Mar 2020
+        16:29:01 UTC; Path=/; Domain=.twitter.com
+      Status:
+      - 403 Forbidden
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - 49fad00f73a6b26f3da5e78ee6b6e090
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Response-Time:
+      - '123'
+      X-Transaction:
+      - '00835ec0004926a3'
+      X-Tsa-Request-Body-Time:
+      - '2'
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block; report=https://twitter.com/i/xss_report
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"code":187,"message":"Status is a duplicate."}]}'
+    http_version: 
+  recorded_at: Sun, 11 Mar 2018 16:29:01 GMT
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/user_timeline.json?count=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - TwitterRubyGem/5.17.0
+      Authorization:
+      - OAuth oauth_consumer_key="trASp8cuQW9tATjHEDtvMaoYr", oauth_nonce="8f85b6d574cb113f7cad48e4ace59541",
+        oauth_signature="DLcQtHpkRfvrh%2Bx7ODQUHucDF%2BU%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1520785741", oauth_token="972554172108288003-9CunSMZSUJdrn8Xnq5iDcmxC3m1iJsF",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '756'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 11 Mar 2018 16:29:02 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Sun, 11 Mar 2018 16:29:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_f
+      Set-Cookie:
+      - guest_id=v1%3A152078574201859697; Expires=Tue, 10 Mar 2020 16:29:02 UTC; Path=/;
+        Domain=.twitter.com
+      - lang=en-gb; Path=/
+      - personalization_id="v1_YyB32SoDUnSHGFDCi2IhoQ=="; Expires=Tue, 10 Mar 2020
+        16:29:02 UTC; Path=/; Domain=.twitter.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - 03be33db844ce68332cc183ede846f32
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '900'
+      X-Rate-Limit-Remaining:
+      - '899'
+      X-Rate-Limit-Reset:
+      - '1520786642'
+      X-Response-Time:
+      - '136'
+      X-Transaction:
+      - 00ff10a8004e78e8
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block; report=https://twitter.com/i/xss_report
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"created_at":"Sun Mar 11 16:25:34 +0000 2018","id":972871159774613504,"id_str":"972871159774613504","text":"foo","truncated":false,"entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[]},"source":"\u003ca
+        href=\"http:\/\/pikesley.org\" rel=\"nofollow\"\u003eSamReadWriteBot\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":972554172108288003,"id_str":"972554172108288003","name":"Rick
+        Roll Bot","screen_name":"rick_roll_bot","location":"","description":"","url":null,"entities":{"description":{"urls":[]}},"protected":false,"followers_count":0,"friends_count":0,"listed_count":0,"created_at":"Sat
+        Mar 10 19:25:58 +0000 2018","favourites_count":0,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":1,"lang":"en-gb","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"F5F8FA","profile_background_image_url":null,"profile_background_image_url_https":null,"profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_normal.png","profile_link_color":"1DA1F2","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"has_extended_profile":false,"default_profile":true,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"lang":"und"}]'
+    http_version: 
+  recorded_at: Sun, 11 Mar 2018 16:29:02 GMT
+recorded_with: VCR 4.0.0
