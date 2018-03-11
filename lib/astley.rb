@@ -13,26 +13,21 @@ Dotenv.load
 module Astley
   BASE_URL = 'https://api-ssl.bitly.com'
 
-  def self.url path, extra_qs = {}
+  def self.clicks_url
     qs = {
       access_token: ENV['token'],
       link: ENV['link'],
       timezone: ENV['tz_offset'],
       unit: 'minute',
-      units: ENV['interval']
+      units: ENV['interval'],
+      rollup: false
     }
-
-    qs.merge! extra_qs
 
     '%s%s?%s' % [
       BASE_URL,
-      path,
+      '/v3/link/clicks',
       qs.map { |k, v| "#{k.to_s}=#{v}" }.join('&')
     ]
-  end
-
-  def self.clicks_url
-    self.url '/v3/link/clicks', {rollup: false}
   end
 
   def self.get url
@@ -51,15 +46,16 @@ module Astley
     }.reverse
   end
 
-  def self.listify_clicks
+  def self.flatten_clicks
     self.fetch_clicks.map { |t| [t.keys[0]] * t.values[0] }.flatten
   end
 
   def self.send_tweets
-    self.listify_clicks.each do |timestamp|
+    self.flatten_clicks.each do |timestamp|
       tweet = 'Somebody got Rickrolled at %s' % [
         DateTime.strptime(timestamp, '%s').strftime('%H:%M on %Y-%m-%d')
       ]
+      puts 'Tweeting: %s' % tweet
       TwitterClient.instance.client.update tweet
     end
   end
